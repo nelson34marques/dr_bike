@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #0b0b0c;
+  --color-ink-2: #131315;
+  --color-ink-3: #1b1b1e;
+  --color-ink-4: #242428;
+  --color-line: #2c2c31;
+  --color-line-2: #3a3a40;
+  --color-fg: #f4f4f1;
+  --color-fg-2: #c9c9c3;
+  --color-fg-3: #8a8a85;
+  --color-brand: #ffd200;
+  --color-brand-2: #ffc400;
+  --color-brand-3: #d9ad00;
+  --color-hot: #ff9a1f;
+  --color-ok: #4ade80;
+  --color-warn: #fb923c;
+  --color-bad: #f87171;
+
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-ink text-fg font-sans antialiased;
+    font-feature-settings: "ss01", "cv11";
+  }
+  h1, h2, h3, h4 { @apply font-display font-bold uppercase tracking-wide; }
+  ::selection { background: var(--color-brand); color: var(--color-ink); }
+  input, select, textarea { color-scheme: dark; }
+  button { cursor: pointer; }
+}
+
+@layer components {
+  .container-x { @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8; }
+
+  /* Todos os botões têm borda (transparente quando não visível) para partilharem a mesma altura. */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-sm border border-transparent px-5 py-3 font-display text-base font-bold uppercase tracking-wider leading-none transition-colors duration-150 select-none disabled:opacity-50 disabled:pointer-events-none;
+  }
+  .btn-primary { @apply bg-brand text-ink hover:bg-brand-2 active:bg-brand-3; }
+  .btn-outline { @apply border-line-2 text-fg hover:border-brand hover:text-brand; }
+  .btn-ghost { @apply text-fg-2 hover:text-fg hover:bg-ink-3; }
+  .btn-danger { @apply border-bad/40 text-bad hover:bg-bad/10; }
+  .btn-sm { @apply px-3 py-2 text-sm; }
+  .btn-lg { @apply px-7 py-4 text-lg; }
+
+  .card { @apply rounded-md border border-line bg-ink-2; }
+  .input {
+    @apply w-full rounded-sm border border-line-2 bg-ink-3 px-3.5 py-2.5 text-fg placeholder:text-fg-3 outline-none transition-colors focus:border-brand;
+  }
+  .label { @apply mb-1.5 block font-display text-sm font-semibold uppercase tracking-wider text-fg-2; }
+  .eyebrow { @apply font-display text-sm font-bold uppercase tracking-[0.2em] text-brand; }
+  .tag { @apply inline-flex items-center gap-1 rounded-sm border border-line-2 px-2 py-0.5 font-display text-xs font-semibold uppercase tracking-wider text-fg-2; }
+
+  .stripe {
+    background-image: repeating-linear-gradient(135deg, var(--color-brand) 0 14px, var(--color-ink) 14px 28px);
+  }
+
+  /* ---------- efeitos visuais (leves, só CSS) ---------- */
+
+  /* Texto com gradiente quente amarelo -> laranja */
+  .text-glow {
+    background: linear-gradient(100deg, var(--color-brand) 0%, var(--color-hot) 120%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  /* Fundo de CTA: gradiente quente com riscas diagonais muito subtis */
+  .bg-hot {
+    background-color: var(--color-brand);
+    background-image:
+      repeating-linear-gradient(135deg, rgba(0,0,0,0.06) 0 2px, transparent 2px 22px),
+      linear-gradient(110deg, var(--color-brand) 0%, var(--color-hot) 100%);
+  }
+
+  /* Brilho radial amarelo (usar num elemento absolute) */
+  .glow {
+    background: radial-gradient(closest-side, rgba(255,210,0,0.22), rgba(255,210,0,0.06) 55%, transparent 100%);
+    filter: blur(8px);
+  }
+
+  /* Grelha de pontos subtil para fundos de secção */
+  .dots {
+    background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+
+  /* Texto grande contornado (marca de água) */
+  .outline-text {
+    color: transparent;
+    -webkit-text-stroke: 1px rgba(255,210,0,0.16);
+  }
+
+  /* Cartão com linha amarela que cresce no hover */
+  .card-hover { @apply relative overflow-hidden; }
+  .card-hover::after {
+    content: "";
+    position: absolute;
+    left: 0; bottom: 0;
+    height: 3px; width: 0;
+    background: linear-gradient(90deg, var(--color-brand), var(--color-hot));
+    transition: width .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .card-hover:hover::after { width: 100%; }
+
+  /* Faixa em movimento */
+  .ticker-track { animation: ticker 28s linear infinite; }
+  .ticker:hover .ticker-track { animation-play-state: paused; }
+  @keyframes ticker { to { transform: translateX(-50%); } }
+
+  /* Entrada suave */
+  .rise { animation: rise .7s cubic-bezier(.2,.8,.2,1) both; }
+  .rise-2 { animation-delay: .12s; }
+  .rise-3 { animation-delay: .24s; }
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .ticker-track, .rise { animation: none; }
+    .card-hover::after { transition: none; }
+  }
+}

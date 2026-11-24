@@ -38,7 +38,7 @@ export default function AdminLayout() {
                 end={end}
                 className={({ isActive }) =>
                   `flex items-center gap-2.5 whitespace-nowrap rounded-sm px-3.5 py-2.5 font-display font-semibold uppercase tracking-wider transition-colors ${
-                    isActive ? 'bg-brand text-ink' : 'text-fg-2 hover:bg-ink-3 hover:text-fg'
+                    isActive ? 'bg-brand text-on-brand' : 'text-fg-2 hover:bg-ink-3 hover:text-fg'
                   }`
                 }
               >

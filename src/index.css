@@ -1,6 +1,32 @@
 @import "tailwindcss";
 
 @theme {
+  --color-ink: #f5f5f2;
+  --color-ink-2: #ffffff;
+  --color-ink-3: #ebebea;
+  --color-ink-4: #e0e0dd;
+  --color-line: #ddddd8;
+  --color-line-2: #c8c8c2;
+  --color-fg: #18181b;
+  --color-fg-2: #4a4a48;
+  --color-fg-3: #71716d;
+  --color-brand: #ffd200;
+  --color-brand-2: #ffc400;
+  --color-brand-3: #d9ad00;
+  --color-hot: #ff9a1f;
+  --color-ok: #16a34a;
+  --color-warn: #ea580c;
+  --color-bad: #dc2626;
+  --color-on-brand: #0b0b0c;
+
+  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
+  --font-sans: "Barlow", system-ui, sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+}
+
+[data-theme="dark"] {
   --color-ink: #0b0b0c;
   --color-ink-2: #131315;
   --color-ink-3: #1b1b1e;
@@ -10,30 +36,23 @@
   --color-fg: #f4f4f1;
   --color-fg-2: #c9c9c3;
   --color-fg-3: #8a8a85;
-  --color-brand: #ffd200;
-  --color-brand-2: #ffc400;
-  --color-brand-3: #d9ad00;
-  --color-hot: #ff9a1f;
   --color-ok: #4ade80;
   --color-warn: #fb923c;
   --color-bad: #f87171;
-
-  --font-display: "Barlow Condensed", "Arial Narrow", sans-serif;
-  --font-sans: "Barlow", system-ui, sans-serif;
-
-  --radius-sm: 4px;
-  --radius-md: 6px;
+  --color-on-brand: #0b0b0c;
+  color-scheme: dark;
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; color-scheme: light; }
+  html[data-theme="dark"] { color-scheme: dark; }
   body {
     @apply bg-ink text-fg font-sans antialiased;
     font-feature-settings: "ss01", "cv11";
   }
   h1, h2, h3, h4 { @apply font-display font-bold uppercase tracking-wide; }
-  ::selection { background: var(--color-brand); color: var(--color-ink); }
-  input, select, textarea { color-scheme: dark; }
+  ::selection { background: var(--color-brand); color: var(--color-on-brand); }
+  input, select, textarea { color-scheme: inherit; }
   button { cursor: pointer; }
 }
 
@@ -44,7 +63,7 @@
   .btn {
     @apply inline-flex items-center justify-center gap-2 rounded-sm border border-transparent px-5 py-3 font-display text-base font-bold uppercase tracking-wider leading-none transition-colors duration-150 select-none disabled:opacity-50 disabled:pointer-events-none;
   }
-  .btn-primary { @apply bg-brand text-ink hover:bg-brand-2 active:bg-brand-3; }
+  .btn-primary { @apply bg-brand text-on-brand hover:bg-brand-2 active:bg-brand-3; }
   .btn-outline { @apply border-line-2 text-fg hover:border-brand hover:text-brand; }
   .btn-ghost { @apply text-fg-2 hover:text-fg hover:bg-ink-3; }
   .btn-danger { @apply border-bad/40 text-bad hover:bg-bad/10; }
@@ -89,7 +108,7 @@
 
   /* Grelha de pontos subtil para fundos de secção */
   .dots {
-    background-image: radial-gradient(rgba(255,255,255,0.07) 1px, transparent 1px);
+    background-image: radial-gradient(color-mix(in srgb, var(--color-fg) 10%, transparent) 1px, transparent 1px);
     background-size: 22px 22px;
   }
 

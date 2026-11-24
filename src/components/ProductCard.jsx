@@ -19,7 +19,7 @@ export default function ProductCard({ p }) {
           <ImageSlot src={p.images?.[0]} alt={p.name} />
         </div>
         {out && <span className="absolute left-3 top-3 rounded-sm bg-ink px-2 py-1 font-display text-xs font-bold uppercase tracking-wider text-fg-2">Esgotado</span>}
-        {p.featured && !out && <span className="absolute left-3 top-3 rounded-sm bg-brand px-2 py-1 font-display text-xs font-bold uppercase tracking-wider text-ink">Destaque</span>}
+        {p.featured && !out && <span className="absolute left-3 top-3 rounded-sm bg-brand px-2 py-1 font-display text-xs font-bold uppercase tracking-wider text-on-brand">Destaque</span>}
       </Link>
       <div className="flex min-w-0 flex-1 flex-col p-3 sm:p-4">
         <span className="eyebrow text-xs">{cat?.label || p.category}</span>

@@ -74,13 +74,13 @@ function StatCounter({ value, label }) {
 
 function StatsSection() {
   return (
-    <section className="bg-hot text-ink">
-      <div className="container-x grid grid-cols-2 gap-y-8 py-12 lg:grid-cols-4">
-        {stats.map((s) => (
-          <StatCounter key={s.label} value={s.value} label={s.label} />
-        ))}
-      </div>
-    </section>
+      <section className="bg-hot text-on-brand">
+        <div className="container-x grid grid-cols-2 gap-y-8 py-12 lg:grid-cols-4">
+          {stats.map((s) => (
+            <StatCounter key={s.label} value={s.value} label={s.label} />
+          ))}
+        </div>
+      </section>
   )
 }
 
@@ -130,15 +130,21 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Espaço para a foto principal. Para usar: <img src="..." className="h-full w-full object-cover" /> em vez do ImageSlot. */}
           <div className="rise rise-2 relative">
             <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line bg-ink-2/90">
-              <ImageSlot label="Imagem principal" iconSize={40} />
+              <img
+                src="https://images.pexels.com/photos/10263879/pexels-photo-10263879.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                alt="Mecânico a reparar uma bicicleta na oficina Dr. Bike"
+                className="h-full w-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
               <span className="absolute bottom-0 left-0 h-1.5 w-28 bg-gradient-to-r from-brand to-hot" aria-hidden="true" />
             </div>
             {/* selo flutuante */}
             <div className="absolute -bottom-5 -left-3 flex items-center gap-3 rounded-sm border border-line bg-ink px-4 py-3 sm:-left-6">
-              <span className="grid h-10 w-10 place-items-center rounded-sm bg-hot text-ink"><ShieldCheck size={22} /></span>
+              <span className="grid h-10 w-10 place-items-center rounded-sm bg-hot text-on-brand"><ShieldCheck size={22} /></span>
               <div className="leading-tight">
                 <div className="font-display text-base font-bold uppercase tracking-wide">Garantia no serviço</div>
                 <div className="text-xs text-fg-2">Orçamento antes de reparar</div>
@@ -156,7 +162,7 @@ export default function Home() {
         <div className="container-x hidden gap-px sm:grid sm:grid-cols-2 lg:grid-cols-4">
           {trust.map(({ icon: I, t, d }) => (
             <div key={t} className="group flex gap-4 py-8 lg:pr-8">
-              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-sm bg-brand text-ink transition-colors group-hover:bg-hot"><I size={22} /></span>
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-sm bg-brand text-on-brand transition-colors group-hover:bg-hot"><I size={22} /></span>
               <div>
                 <h3 className="text-lg">{t}</h3>
                 <p className="mt-1 text-sm text-fg-2">{d}</p>
@@ -183,7 +189,7 @@ export default function Home() {
                     zIndex: active ? 2 : 1,
                   }}
                 >
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-sm bg-brand text-ink"><I size={22} /></span>
+                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-sm bg-brand text-on-brand"><I size={22} /></span>
                   <div>
                     <h3 className="text-lg">{t}</h3>
                     <p className="mt-1 text-sm text-fg-2">{d}</p>
@@ -201,7 +207,7 @@ export default function Home() {
         <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-6">
           {categories.map((c) => (
             <Link key={c.id} to={`/loja?categoria=${c.id}`} className="card card-hover group flex flex-col items-center gap-3 p-6 text-center transition-colors hover:border-brand/60 hover:bg-ink-3">
-              <span className="grid h-14 w-14 place-items-center rounded-full bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-ink">
+              <span className="grid h-14 w-14 place-items-center rounded-full bg-brand/10 text-brand transition-colors group-hover:bg-brand group-hover:text-on-brand">
                 <Icon name={c.icon} size={28} />
               </span>
               <span className="font-display text-lg font-bold uppercase leading-tight tracking-wide group-hover:text-brand">{c.label}</span>
@@ -274,7 +280,13 @@ export default function Home() {
         <div className="relative">
           <div className="absolute -left-4 -top-4 h-24 w-24 stripe opacity-70" aria-hidden="true" />
           <div className="relative aspect-[4/3] overflow-hidden rounded-md border border-line bg-ink-2">
-            <ImageSlot label="Foto da oficina" iconSize={40} />
+            <img
+              src="https://images.pexels.com/photos/33506466/pexels-photo-33506466.jpeg?auto=compress&cs=tinysrgb&w=1200"
+              alt="Interior da oficina Dr. Bike com mecânico a trabalhar"
+              className="h-full w-full object-cover"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
         </div>
         <div>
@@ -294,13 +306,13 @@ export default function Home() {
       </section>
 
       {/* CTA WHATSAPP */}
-      <section className="bg-hot text-ink">
+      <section className="bg-hot text-on-brand">
         <div className="container-x flex flex-col items-start justify-between gap-6 py-14 md:flex-row md:items-center">
           <div>
             <h2 className="text-4xl leading-none sm:text-5xl">Precisas de ajuda agora?</h2>
             <p className="mt-2 font-medium">Fala connosco no WhatsApp. Respondemos em horário de expediente.</p>
           </div>
-          <a href={waLink('Olá Dr. Bike! Preciso de ajuda com o meu veículo.')} target="_blank" rel="noreferrer" className="btn btn-lg bg-ink text-fg hover:bg-ink-3">
+          <a href={waLink('Olá Dr. Bike! Preciso de ajuda com o meu veículo.')} target="_blank" rel="noreferrer" className="btn btn-lg bg-[#0b0b0c] text-[#f4f4f1] hover:bg-[#1b1b1e]">
             <MessageCircle size={20} /> Abrir WhatsApp
           </a>
         </div>

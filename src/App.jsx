@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Outlet, useLocation } from 'react-router-
 import { AuthProvider } from './context/AuthContext'
 import { CartProvider } from './context/CartContext'
 import { ToastProvider } from './context/ToastContext'
+import { ThemeProvider } from './context/ThemeContext'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import WhatsAppFloat from './components/WhatsAppFloat'
@@ -52,11 +53,12 @@ function Shell() {
 export default function App() {
   return (
     <BrowserRouter>
-      <ToastProvider>
-        <AuthProvider>
-          <CartProvider>
-            <ScrollToTop />
-            <Routes>
+      <ThemeProvider>
+        <ToastProvider>
+          <AuthProvider>
+            <CartProvider>
+              <ScrollToTop />
+              <Routes>
               <Route element={<Shell />}>
                 <Route path="/" element={<Home />} />
                 <Route path="/servicos" element={<Servicos />} />
@@ -77,9 +79,10 @@ export default function App() {
                 <Route path="*" element={<NotFound />} />
               </Route>
             </Routes>
-          </CartProvider>
-        </AuthProvider>
-      </ToastProvider>
+            </CartProvider>
+          </AuthProvider>
+        </ToastProvider>
+      </ThemeProvider>
     </BrowserRouter>
   )
 }

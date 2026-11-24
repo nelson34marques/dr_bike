@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { Menu, X, ShoppingCart, User, LogOut, Shield, CalendarCheck } from 'lucide-react'
+import { Menu, X, ShoppingCart, User, LogOut, Shield, CalendarCheck, Sun, Moon } from 'lucide-react'
 import Logo from './Logo'
 import { useCart } from '../context/CartContext'
 import { useAuth } from '../context/AuthContext'
+import { useTheme } from '../context/ThemeContext'
 
 const links = [
   { to: '/', label: 'Início', end: true },
@@ -17,6 +18,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false)
   const { count } = useCart()
   const { user, isAdmin, logout } = useAuth()
+  const { theme, toggle } = useTheme()
   const close = () => setOpen(false)
 
   const cls = ({ isActive }) =>
@@ -40,6 +42,9 @@ export default function Navbar() {
         </nav>
 
         <div className="col-start-3 flex items-center gap-1 sm:gap-2">
+          <button onClick={toggle} className="btn btn-ghost btn-sm" title={theme === 'dark' ? 'Modo claro' : 'Modo escuro'} aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}>
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
           {isAdmin && (
             <Link to="/admin" className="btn btn-ghost btn-sm hidden sm:inline-flex" title="Painel de admin">
               <Shield size={18} /> Admin
@@ -64,7 +69,7 @@ export default function Navbar() {
           <Link to="/carrinho" className="btn btn-ghost btn-sm relative" title="Carrinho" aria-label="Carrinho">
             <ShoppingCart size={18} />
             {count > 0 && (
-              <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-brand px-1 font-display text-xs font-bold text-ink">
+              <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-brand px-1 font-display text-xs font-bold text-on-brand">
                 {count}
               </span>
             )}

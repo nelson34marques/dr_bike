@@ -30,8 +30,8 @@ export default function Navbar() {
   return (
     <header className="sticky top-0 z-50 border-b border-line bg-ink/95 backdrop-blur">
       <div className="h-1 stripe" />
-      <div className="container-x grid h-[68px] grid-cols-[auto_1fr_auto] items-center gap-6 lg:gap-10">
-        <Logo />
+      <div className="container-x grid h-[68px] grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-6 lg:gap-10">
+        <Logo className="min-w-0" />
 
         <nav className="hidden items-center justify-center gap-8 lg:flex" aria-label="Principal">
           {links.map((l) => (
@@ -41,8 +41,8 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="col-start-3 flex items-center gap-1 sm:gap-2">
-          <button onClick={toggle} className="btn btn-ghost btn-sm" title={theme === 'dark' ? 'Modo claro' : 'Modo escuro'} aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}>
+        <div className="col-start-3 flex items-center gap-0.5 sm:gap-2">
+          <button onClick={toggle} className="btn btn-ghost btn-sm px-2 sm:px-3" title={theme === 'dark' ? 'Modo claro' : 'Modo escuro'} aria-label={theme === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'}>
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
           </button>
           {isAdmin && (
@@ -52,7 +52,7 @@ export default function Navbar() {
           )}
           {user ? (
             <>
-              <Link to="/conta" className="btn btn-ghost btn-sm" title="A minha conta">
+              <Link to="/conta" className="btn btn-ghost btn-sm px-2 sm:px-3" title="A minha conta">
                 <User size={18} />
                 <span className="hidden sm:inline">Conta</span>
               </Link>
@@ -61,12 +61,12 @@ export default function Navbar() {
               </button>
             </>
           ) : (
-            <Link to="/login" className="btn btn-ghost btn-sm">
+            <Link to="/login" className="btn btn-ghost btn-sm px-2 sm:px-3">
               <User size={18} />
               <span className="hidden sm:inline">Entrar</span>
             </Link>
           )}
-          <Link to="/carrinho" className="btn btn-ghost btn-sm relative" title="Carrinho" aria-label="Carrinho">
+          <Link to="/carrinho" className="btn btn-ghost btn-sm relative px-2 sm:px-3" title="Carrinho" aria-label="Carrinho">
             <ShoppingCart size={18} />
             {count > 0 && (
               <span className="absolute -right-0.5 -top-0.5 grid h-5 min-w-5 place-items-center rounded-full bg-brand px-1 font-display text-xs font-bold text-on-brand">
@@ -78,7 +78,7 @@ export default function Navbar() {
           <Link to="/marcacao" className="btn btn-primary btn-sm hidden md:inline-flex">
             <CalendarCheck size={18} /> Marcar
           </Link>
-          <button className="btn btn-ghost btn-sm lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="Menu" aria-expanded={open}>
+          <button className="btn btn-ghost btn-sm px-2 sm:px-3 lg:hidden" onClick={() => setOpen((v) => !v)} aria-label="Menu" aria-expanded={open}>
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
